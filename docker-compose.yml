@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+
+  whatsapp_service:
+    build:
+      context: /Users/rupali/experiment/docker_works/plugins/whatsapp_service
+      dockerfile: Dockerfile
+    environment:
+      - SERVICE_API_KEY=${SERVICE_API_KEY}
+    ports:
+      - "8000:8000"  # Assign unique ports for each service
+    volumes:
+      - /Users/rupali/experiment/docker_works/plugins/whatsapp_service:/app
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+            
+  scheduler_service:
+    build:
+      context: /Users/rupali/experiment/docker_works/plugins/scheduler_service
+      dockerfile: Dockerfile
+    environment:
+      - SERVICE_API_KEY=${SERVICE_API_KEY}
+    ports:
+      - "8001:8000"  # Assign unique ports for each service
+    volumes:
+      - /Users/rupali/experiment/docker_works/plugins/scheduler_service:/app
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+            
+  email_service:
+    build:
+      context: /Users/rupali/experiment/docker_works/plugins/email_service
+      dockerfile: Dockerfile
+    environment:
+      - SERVICE_API_KEY=${SERVICE_API_KEY}
+    ports:
+      - "8002:8000"  # Assign unique ports for each service
+    volumes:
+      - /Users/rupali/experiment/docker_works/plugins/email_service:/app
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+            
